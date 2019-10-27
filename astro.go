@@ -1,4 +1,4 @@
-package main
+package astro
 
 // http://cosinekitty.com/solar_system.html
 
@@ -90,14 +90,14 @@ var nameZod = map[int]string{
 var hMonth = map[string]int{"Nisan": 1, "Iyyar": 2, "Sivan": 3, "Tamuz": 4, "Av": 5, "Elul": 6, "Tishrei": 7, "Cheshvan": 8, "Kislev": 9, "Tevet": 10, "Shvat": 11, "Adar1": 12, "Adar2": 13}
 
 type planetInfo struct {
-	name         string
-	zodiak       int
-	angle_Helio  float64
+	Name         string
+	Zodiak       int
+	Angle_Helio  float64
 	year         float64
 	radius       float64
 	startPos     float64
-	angle_Geo    float64
-	angle_zodiak float64
+	Angle_Geo    float64
+	Angle_zodiak float64
 	Xecl         float64
 	Yecl         float64
 	Zecl         float64
@@ -121,22 +121,23 @@ type possPlanet struct {
 	E         float64 // eccentric anomaly
 }
 type sunSystem struct {
-	obj [10]planetInfo
+	Obj [10]planetInfo
 }
 
 var planets = [10]planetInfo{
-	{name: "Sun", Xecl: CentX, Yecl: CentY, year: 0, pos: possPlanet{N: 0, i: 0, w: 282.9404, w_per_day: 4.70935E-5, a: 1.0, e: 0.016709, e_per_day: -1.151E-9, M: 356.0470, M_per_day: 0.9856002585}},
-	{name: "Mercury", startPos: startMer, year: MerDur, radius: MerDis, pos: possPlanet{N: 48.3313, N_per_day: 3.24587E-5, i: 7.0047, i_per_day: 5.00E-8, w: 29.1241, w_per_day: 1.01444E-5, a: 0.387098, e: 0.205635, e_per_day: 5.59E-10, M: 168.6562, M_per_day: 4.0923344368}},
-	{name: "Venus", startPos: startVen, year: VenDur, radius: VenDis, pos: possPlanet{N: 76.6799, N_per_day: 2.46590E-5, i: 3.3946, i_per_day: 2.75E-8, w: 54.8910, w_per_day: 1.38374E-5, a: 0.723330, e: 0.006773, e_per_day: -1.302E-9, M: 48.0052, M_per_day: 1.6021302244}},
-	{name: "Earth", startPos: startEar, year: EarDur, radius: EarDis},
-	{name: "Mars", startPos: startMar, year: MarDur, radius: MarDis, pos: possPlanet{N: 49.5574, N_per_day: 2.11081E-5, i: 1.8497, i_per_day: -1.78E-8, w: 286.5016, w_per_day: 2.92961E-5, a: 1.523688, e: 0.093405, e_per_day: 2.516E-9, M: 18.6021, M_per_day: 0.5240207766}},
-	{name: "Jupiter", startPos: startJup, year: JupDur, radius: JupDis, pos: possPlanet{N: 100.4542, N_per_day: 2.76854E-5, i: 1.3030, i_per_day: -1.557E-7, w: 273.8777, w_per_day: 1.64505E-5, a: 5.20256, e: 0.048498, e_per_day: 4.469E-9, M: 19.8950, M_per_day: 0.0830853001}},
-	{name: "Saturn", startPos: startSat, year: SatDur, radius: SatDis, pos: possPlanet{N: 113.6634, N_per_day: 2.38980E-5, i: 2.4886, i_per_day: -1.081E-7, w: 339.3939, w_per_day: 2.97661E-5, a: 9.55475, e: 0.055546, e_per_day: -9.499E-9, M: 316.9670, M_per_day: 0.0334442282}},
-	{name: "Uranus", startPos: startUra, year: UraDur, radius: UraDis, pos: possPlanet{N: 74.0005, N_per_day: 1.3978E-5, i: 0.7733, i_per_day: 1.9E-8, w: 96.6612, w_per_day: 3.0565E-5, a: 19.18171, a_per_day: -1.55E-8, e: 0.047318, e_per_day: 7.45E-9, M: 142.5905, M_per_day: 0.011725806}},
-	{name: "Neptune", startPos: startNep, year: NepDur, radius: NepDis, pos: possPlanet{N: 131.7806, N_per_day: 3.0173E-5, i: 1.7700, i_per_day: -2.55E-7, w: 272.8461, w_per_day: -6.027E-6, a: 30.05826, a_per_day: 3.313E-8, e: 0.008606, e_per_day: 2.15E-9, M: 260.2471, M_per_day: 0.005995147}},
-	{name: "Moon", startPos: startMoon, year: MoonDur, radius: MoonDis, pos: possPlanet{N: 125.1228, N_per_day: -0.0529538083, i: 5.1454, w: 318.0634, w_per_day: 0.1643573223, a: 60.2666, e: 0.0549, M: 115.3654, M_per_day: 13.0649929509}},
+	{Name: "Sun", Xecl: CentX, Yecl: CentY, year: 0, pos: possPlanet{N: 0, i: 0, w: 282.9404, w_per_day: 4.70935E-5, a: 1.0, e: 0.016709, e_per_day: -1.151E-9, M: 356.0470, M_per_day: 0.9856002585}},
+	{Name: "Mercury", startPos: startMer, year: MerDur, radius: MerDis, pos: possPlanet{N: 48.3313, N_per_day: 3.24587E-5, i: 7.0047, i_per_day: 5.00E-8, w: 29.1241, w_per_day: 1.01444E-5, a: 0.387098, e: 0.205635, e_per_day: 5.59E-10, M: 168.6562, M_per_day: 4.0923344368}},
+	{Name: "Venus", startPos: startVen, year: VenDur, radius: VenDis, pos: possPlanet{N: 76.6799, N_per_day: 2.46590E-5, i: 3.3946, i_per_day: 2.75E-8, w: 54.8910, w_per_day: 1.38374E-5, a: 0.723330, e: 0.006773, e_per_day: -1.302E-9, M: 48.0052, M_per_day: 1.6021302244}},
+	{Name: "Earth", startPos: startEar, year: EarDur, radius: EarDis},
+	{Name: "Mars", startPos: startMar, year: MarDur, radius: MarDis, pos: possPlanet{N: 49.5574, N_per_day: 2.11081E-5, i: 1.8497, i_per_day: -1.78E-8, w: 286.5016, w_per_day: 2.92961E-5, a: 1.523688, e: 0.093405, e_per_day: 2.516E-9, M: 18.6021, M_per_day: 0.5240207766}},
+	{Name: "Jupiter", startPos: startJup, year: JupDur, radius: JupDis, pos: possPlanet{N: 100.4542, N_per_day: 2.76854E-5, i: 1.3030, i_per_day: -1.557E-7, w: 273.8777, w_per_day: 1.64505E-5, a: 5.20256, e: 0.048498, e_per_day: 4.469E-9, M: 19.8950, M_per_day: 0.0830853001}},
+	{Name: "Saturn", startPos: startSat, year: SatDur, radius: SatDis, pos: possPlanet{N: 113.6634, N_per_day: 2.38980E-5, i: 2.4886, i_per_day: -1.081E-7, w: 339.3939, w_per_day: 2.97661E-5, a: 9.55475, e: 0.055546, e_per_day: -9.499E-9, M: 316.9670, M_per_day: 0.0334442282}},
+	{Name: "Uranus", startPos: startUra, year: UraDur, radius: UraDis, pos: possPlanet{N: 74.0005, N_per_day: 1.3978E-5, i: 0.7733, i_per_day: 1.9E-8, w: 96.6612, w_per_day: 3.0565E-5, a: 19.18171, a_per_day: -1.55E-8, e: 0.047318, e_per_day: 7.45E-9, M: 142.5905, M_per_day: 0.011725806}},
+	{Name: "Neptune", startPos: startNep, year: NepDur, radius: NepDis, pos: possPlanet{N: 131.7806, N_per_day: 3.0173E-5, i: 1.7700, i_per_day: -2.55E-7, w: 272.8461, w_per_day: -6.027E-6, a: 30.05826, a_per_day: 3.313E-8, e: 0.008606, e_per_day: 2.15E-9, M: 260.2471, M_per_day: 0.005995147}},
+	{Name: "Moon", startPos: startMoon, year: MoonDur, radius: MoonDis, pos: possPlanet{N: 125.1228, N_per_day: -0.0529538083, i: 5.1454, w: 318.0634, w_per_day: 0.1643573223, a: 60.2666, e: 0.0549, M: 115.3654, M_per_day: 13.0649929509}},
 }
-var SS = sunSystem{obj: planets}
+
+// var SS = sunSystem{Obj: planets}
 
 var p = fmt.Println
 var pf = fmt.Printf
@@ -148,7 +149,7 @@ const (
 	obl_per_day = 3.563E-7
 )
 
-func calcDays(d, m, y int) float64 {
+func CalcDays(d, m, y int) float64 {
 	return float64(367*y - 7*(y+(m+9)/12)/4 + 275*m/9 + d - 730530)
 }
 
@@ -191,7 +192,7 @@ func (pl *planetInfo) calcPos(day float64) {
 	// p("lon", lon)
 
 	// possition in space and Zodiak
-	if pl.name != "Moon" {
+	if pl.Name != "Moon" {
 
 		xh := a * (math.Cos(N*Pi/180)*math.Cos((v*Pi/180+w*Pi/180)) - math.Sin(N*Pi/180)*math.Sin((v*Pi/180+w*Pi/180))*math.Cos(i*Pi/180))
 		yh := a * (math.Sin(N*Pi/180)*math.Cos((v*Pi/180+w*Pi/180)) + math.Cos(N*Pi/180)*math.Sin((v*Pi/180+w*Pi/180))*math.Cos(i*Pi/180))
@@ -205,18 +206,18 @@ func (pl *planetInfo) calcPos(day float64) {
 		pl.Xecl = xh
 		pl.Yecl = yh
 		pl.Zecl = zh
-		pl.angle_Helio = lonEcl
+		pl.Angle_Helio = lonEcl
 
-		if pl.name == "Sun" {
-			pl.angle_Geo = lonEcl
-			pl.angle_zodiak = lonEcl
-			for pl.angle_zodiak > 30 {
-				pl.angle_zodiak -= 30
+		if pl.Name == "Sun" {
+			pl.Angle_Geo = lonEcl
+			pl.Angle_zodiak = lonEcl
+			for pl.Angle_zodiak > 30 {
+				pl.Angle_zodiak -= 30
 			}
-			pl.zodiak = int(lonEcl/30) + 1
+			pl.Zodiak = int(lonEcl/30) + 1
 		}
 
-		// p("lonEcl", lonEcl, " latEcl", latEcl, " zod", nameZod[pl.zodiak])
+		// p("lonEcl", lonEcl, " latEcl", latEcl, " zod", nameZod[pl.Zodiak])
 
 	} else {
 		xeclip := r * (math.Cos(N*Pi/180)*math.Cos((v*Pi/180+w*Pi/180)) - math.Sin(N*Pi/180)*math.Sin((v*Pi/180+w*Pi/180))*math.Cos(i*Pi/180))
@@ -233,16 +234,16 @@ func (pl *planetInfo) calcPos(day float64) {
 		pl.Xecl = xeclip
 		pl.Yecl = yeclip
 		pl.Zecl = zeclip
-		pl.angle_Helio = long
+		pl.Angle_Helio = long
 
-		pl.angle_Geo = long
-		pl.angle_zodiak = long
-		for pl.angle_zodiak > 30 {
-			pl.angle_zodiak -= 30
+		pl.Angle_Geo = long
+		pl.Angle_zodiak = long
+		for pl.Angle_zodiak > 30 {
+			pl.Angle_zodiak -= 30
 		}
-		pl.zodiak = int(long/30) + 1
+		pl.Zodiak = int(long/30) + 1
 
-		// p("long", long, " lat", lat, " Zod", nameZod[pl.zodiak])
+		// p("long", long, " lat", lat, " Zod", nameZod[pl.Zodiak])
 	}
 }
 func (pl *planetInfo) calcGeoPos(xh, yh, zh float64) {
@@ -250,40 +251,43 @@ func (pl *planetInfo) calcGeoPos(xh, yh, zh float64) {
 	yg := pl.Yecl + yh
 	// zg := pl.Zecl + zh
 
-	pl.angle_Geo = math.Atan2(yg, xg) / T * 360
-	rev(&pl.angle_Geo)
-	pl.angle_zodiak = pl.angle_Geo
-	for pl.angle_zodiak > 30 {
-		pl.angle_zodiak -= 30
+	pl.Angle_Geo = math.Atan2(yg, xg) / T * 360
+	rev(&pl.Angle_Geo)
+	pl.Angle_zodiak = pl.Angle_Geo
+	for pl.Angle_zodiak > 30 {
+		pl.Angle_zodiak -= 30
 	}
-	pl.zodiak = int(pl.angle_Geo/30) + 1
-	// p("zod", pl.zodiak)
+	pl.Zodiak = int(pl.Angle_Geo/30) + 1
+	// p("zod", pl.Zodiak)
 }
 
 func (ss *sunSystem) Calculate(day float64) {
 	for i := 0; i < 10; i++ {
-		ss.obj[i].calcPos(day)
+		ss.Obj[i].calcPos(day)
 	}
 	for i := 1; i < 9; i++ { // С луной пока не решил
-		ss.obj[i].calcGeoPos(ss.obj[0].Xecl, ss.obj[0].Yecl, ss.obj[0].Zecl)
+		ss.Obj[i].calcGeoPos(ss.Obj[0].Xecl, ss.Obj[0].Yecl, ss.Obj[0].Zecl)
 	}
 }
-
-func main() {
-
-	var y, m, D int
-	D = 9
-	m = 9
-	y = 1990
-
-	d := calcDays(D, m, y)
-
-	SS.Calculate(d)
-
-	for i := 0; i < 10; i++ {
-		pf("%s (H) %.2f°,(G) %s %.2f°\n", SS.obj[i].name, SS.obj[i].angle_Helio, nameZod[SS.obj[i].zodiak], SS.obj[i].angle_zodiak)
-	}
+func NewAstro() *sunSystem {
+	return &sunSystem{Obj: planets}
 }
+
+// func main() {
+
+// 	var y, m, D int
+// 	D = 9
+// 	m = 9
+// 	y = 1990
+
+// 	d := CalcDays(D, m, y)
+
+// 	SS.Calculate(d)
+
+// 	for i := 0; i < 10; i++ {
+// 		pf("%s (H) %.2f°,(G) %s %.2f°\n", SS.Obj[i].Name, SS.Obj[i].Angle_Helio, nameZod[SS.Obj[i].Zodiak], SS.Obj[i].Angle_zodiak)
+// 	}
+// }
 
 func rev(x *float64) {
 	var rv float64
